@@ -36,18 +36,15 @@
     "minimist": "^1.2.8",
     "mixwith": "^0.1.1",
     "promised-handlebars": "^2.0.1",
-    "prop-types": "^15.7.2",
     "readable-stream": "^3.6.0",
     "require-all": "^3.0.0",
     "resolve-from": "^5.0.0",
-    "semver": "^7.3.5",
-    "update-notifier": "^5.1.0"
+    "semver": "^7.3.5"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
     "@babel/eslint-parser": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
-    "@babel/preset-react": "^7.26.0",
     "@babel/register": "^7.26.0",
     "ajv": "^8.17.1",
     "ajv-keywords": "^5.1.0",
@@ -64,7 +61,6 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.5",
-    "eslint-plugin-react": "^7.37.5",
     "jest": "^29.7.0",
     "jest-extended": "^4.0.2",
     "jquery": "^3.7.1",
@@ -72,7 +68,6 @@
     "jquery-resizable-dom": "^0.35.0",
     "js-beautify": "^1.15.4",
     "js-yaml": "^4.1.1",
-    "lerna": "^8.1.9",
     "lodash": "^4.18.1",
     "mark.js": "^8.11.1",
     "marked": "^15.0.12",
@@ -87,6 +82,7 @@
     "path-to-regexp": "^6.3.0",
     "postcss": "^8.2.13",
     "postcss-loader": "^8.2.1",
+    "postcss-selector-parser": "^7.1.1",
     "prettier": "^3.8.3",
     "regenerator-runtime": "^0.14.1",
     "resolve-url-loader": "^5.0.0",
@@ -103,7 +99,6 @@
     "throat": "^6.0.2",
     "vinyl": "^3.0.1",
     "webpack": "^5.97.1",
-    "webpack-bundle-analyzer": "^5.3.0",
     "webpack-cli": "^7.0.2",
     "yargs": "^17.7.2"
   }

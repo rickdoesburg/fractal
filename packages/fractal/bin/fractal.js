@@ -6,12 +6,7 @@ const Path = require('path');
 const semver = require('semver');
 const Liftoff = require('liftoff');
 const chalk = require('chalk');
-const updateNotifier = require('update-notifier');
 const cliPackage = require('../package.json');
-
-const notifier = updateNotifier({
-    pkg: cliPackage,
-});
 
 const FractalCli = new Liftoff({
     processTitle: 'fractal',
@@ -101,16 +96,6 @@ FractalCli.launch(config, function (env) {
     } else {
         // Global context
         app = require('../.').create();
-    }
-
-    /*
-     * Notify of any available updates on exit
-     */
-
-    if (notifier.update) {
-        process.on('exit', function () {
-            app.cli.notify.updateAvailable(notifier.update);
-        });
     }
 
     /*

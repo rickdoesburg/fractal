@@ -1,4 +1,3 @@
 module.exports = {
-    // for running react example tests
-    presets: ['@babel/preset-react', '@babel/preset-env'],
+    presets: ['@babel/preset-env'],
 };

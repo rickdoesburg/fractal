@@ -27,17 +27,5 @@ module.exports = {
                 jest: true,
             },
         },
-        {
-            files: ['**/*.jsx'],
-            extends: ['plugin:react/recommended'],
-            settings: {
-                react: {
-                    version: 'detect',
-                },
-            },
-            parserOptions: {
-                ecmaFeatures: { jsx: true },
-            },
-        },
     ],
 };
