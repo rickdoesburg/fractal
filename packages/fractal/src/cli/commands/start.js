@@ -14,7 +14,7 @@ module.exports = {
     },
 
     action(args, done) {
-        const server = this.fractal.web.server(args.options);
+        const server = this.fractal.web.server(args);
 
         server.on('ready', () => {
             const header = 'Fractal web UI server is running!';
@@ -48,7 +48,7 @@ module.exports = {
         server.on('destroy', () => done());
         server.on('stopped', () => done());
 
-        server.start(args.options.sync).catch((e) => {
+        server.start(args.sync).catch((e) => {
             this.console.error(e);
             done();
         });

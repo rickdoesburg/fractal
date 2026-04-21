@@ -1,11 +1,8 @@
 'use strict';
 
-const Promise = require('bluebird');
 const Path = require('path');
 const Handlebars = require('handlebars');
-const inquirer = require('inquirer');
 const execa = require('execa');
-const shell = require('@frctl/core').shell;
 const fs = require('fs-extra');
 const helpers = require('@frctl/core').utils;
 
@@ -15,6 +12,14 @@ module.exports = {
     config: {
         description: 'Create a new Fractal project',
         scope: ['global'],
+        options: [
+            ['--title <title>', 'Project title', null],
+            ['--components <dir>', 'Components directory', 'components'],
+            ['--docs <dir>', 'Documentation directory', 'docs'],
+            ['--public <dir>', 'Public/static files directory', 'public'],
+            ['--git', 'Initialize Git repository', true],
+            ['--no-git', 'Skip Git initialization'],
+        ],
     },
 
     action(args, done) {
@@ -33,107 +38,91 @@ module.exports = {
             return;
         }
 
-        console.br().log('Creating new project.... just a few questions:').br();
+        // Use provided values or sensible defaults
+        const projectTitle = args.title || helpers.titlize(args.path);
+        const componentsDir = args.components || 'components';
+        const docsDir = args.docs || 'docs';
+        const publicDir = args.public || 'public';
+        const useGit = args.git !== false; // true by default unless --no-git
 
-        const questions = [
-            {
-                type: 'input',
-                name: 'projectTitle',
-                message: "What's the title of your project?",
-                default: helpers.titlize(args.path),
+        console.br().log(`Creating new Fractal project: ${projectTitle}`).br();
+
+        const componentsPath = Path.join(basePath, componentsDir);
+        const docsPath = Path.join(basePath, docsDir);
+        const publicPath = Path.join(basePath, publicDir);
+        const packageJSONPath = Path.join(basePath, 'package.json');
+        const gitIgnorePath = Path.join(basePath, '.gitignore');
+        const fractalFilePath = Path.join(basePath, 'fractal.config.js');
+        const docsIndexPath = Path.join(docsPath, '01-index.md');
+
+        // Create directories
+        fs.ensureDirSync(basePath);
+        fs.ensureDirSync(componentsPath);
+        fs.ensureDirSync(docsPath);
+        fs.ensureDirSync(publicPath);
+
+        // Create package.json
+        const packageJSON = {
+            name: args.path,
+            version: '0.1.0',
+            dependencies: {
+                '@frctl/fractal': fractal.version,
             },
-            {
-                type: 'input',
-                name: 'componentsDir',
-                message: 'Where would you like to keep your components?',
-                default: 'components',
+            scripts: {
+                start: 'fractal start --sync',
+                build: 'fractal build',
             },
-            {
-                type: 'input',
-                name: 'docsDir',
-                message: 'Where would you like to keep your docs?',
-                default: 'docs',
+        };
+        fs.writeFileSync(packageJSONPath, JSON.stringify(packageJSON, null, 2));
+        console.success(`Created package.json`);
+
+        // Create fractal.config.js from template
+        const fractalFileContent = Handlebars.compile(fs.readFileSync(fractalFileTpl, 'utf8'))({
+            project: {
+                title: projectTitle,
             },
-            {
-                type: 'input',
-                name: 'publicDir',
-                message: 'What would you like to call your public directory?',
-                default: 'public',
+            paths: {
+                components: componentsDir,
+                docs: docsDir,
+                public: publicDir,
             },
-            {
-                type: 'confirm',
-                name: 'useGit',
-                message: 'Will you use Git for version control on this project?',
-                default: true,
-            },
-        ];
-
-        return inquirer.prompt(questions).then(function (answers) {
-            console.log('Generating project structure...');
-
-            const componentsDir = Path.join(basePath, answers.componentsDir);
-            const docsDir = Path.join(basePath, answers.docsDir);
-            const publicDir = Path.join(basePath, answers.publicDir);
-            const packageJSONPath = Path.join(basePath, 'package.json');
-            const gitIgnorePath = Path.join(basePath, '.gitignore');
-            const fractalFilePath = Path.join(basePath, 'fractal.config.js');
-            const docsIndexPath = Path.join(docsDir, '01-index.md');
-            const componentCopyTo = Path.join(componentsDir, 'example');
-
-            const packageJSON = {
-                name: helpers.slugify(answers.projectTitle),
-                version: '0.1.0',
-                dependencies: {
-                    '@frctl/fractal': `^${fractal.get('version')}`,
-                },
-                scripts: {
-                    'fractal:start': 'fractal start --sync',
-                    'fractal:build': 'fractal build',
-                },
-            };
-
-            const fractalContents = Handlebars.compile(fs.readFileSync(fractalFileTpl, 'utf8'))(answers);
-            const indexContents = Handlebars.compile(fs.readFileSync(docsIndexTpl, 'utf8'))(answers);
-
-            return fs
-                .ensureDir(basePath)
-                .then(() => {
-                    return Promise.all([
-                        fs.ensureDir(componentsDir),
-                        fs.ensureDir(docsDir),
-                        fs.ensureDir(publicDir),
-                        fs.writeJson(packageJSONPath, packageJSON),
-                    ]);
-                })
-                .then(() => {
-                    return fs.copy(exampleComponent, componentCopyTo);
-                })
-                .then((paths) => {
-                    if (answers.useGit) {
-                        shell.touch(Path.join(publicDir, '.gitkeep'));
-                        return fs.writeFile(gitIgnorePath, 'node_modules\n');
-                    }
-                    return paths;
-                })
-                .then(() => {
-                    return Promise.all([
-                        fs.writeFile(fractalFilePath, fractalContents),
-                        fs.writeFile(docsIndexPath, indexContents),
-                    ]);
-                })
-                .finally(async () => {
-                    console.log('Installing NPM dependencies - this may take some time!');
-                    shell.cd(basePath);
-                    const { stdout } = await execa('npm', ['install']);
-                    console.log(stdout);
-                    console.success('Your new Fractal project has been set up.');
-                    done();
-                })
-                .catch((e) => {
-                    fs.remove(basePath);
-                    console.error(e);
-                    done();
-                });
         });
+        fs.writeFileSync(fractalFilePath, fractalFileContent);
+        console.success(`Created fractal.config.js`);
+
+        // Create docs index
+        fs.writeFileSync(docsIndexPath, fs.readFileSync(docsIndexTpl, 'utf8'));
+        console.success(`Created documentation index`);
+
+        // Copy example component
+        fs.copySync(exampleComponent, Path.join(componentsPath, 'example'));
+        console.success(`Created example component`);
+
+        // Create .gitignore if using git
+        if (useGit) {
+            const gitIgnoreContent = ['node_modules', 'dist', '.DS_Store', '*.log'].join('\n');
+            fs.writeFileSync(gitIgnorePath, gitIgnoreContent);
+            console.success(`Created .gitignore`);
+
+            // Initialize git repo
+            try {
+                execa.sync('git', ['init'], { cwd: basePath });
+                console.success(`Initialized Git repository`);
+            } catch (err) {
+                console.warn(`Could not initialize Git repository: ${err.message}`);
+            }
+        }
+
+        console
+            .br()
+            .success(`Project created successfully!`)
+            .br()
+            .log(`To get started:`)
+            .log(`  cd ${baseDir}`)
+            .log(`  npm install`)
+            .log(`  npm start`)
+            .br();
+
+        done();
     },
 };

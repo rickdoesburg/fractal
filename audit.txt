@@ -1,0 +1,879 @@
+# npm audit report
+
+@babel/helpers  <7.26.10
+Severity: moderate
+Babel has inefficient RegExp complexity in generated code with .replace when transpiling named capturing groups - https://github.com/advisories/GHSA-968p-4wvh-cqc8
+fix available via `npm audit fix`
+node_modules/@babel/helpers
+
+@babel/runtime  <7.26.10
+Severity: moderate
+Babel has inefficient RegExp complexity in generated code with .replace when transpiling named capturing groups - https://github.com/advisories/GHSA-968p-4wvh-cqc8
+fix available via `npm audit fix`
+node_modules/@babel/runtime
+
+@babel/traverse  <7.23.2
+Severity: critical
+Babel vulnerable to arbitrary code execution when compiling specifically crafted malicious code - https://github.com/advisories/GHSA-67hx-6x53-jw92
+fix available via `npm audit fix`
+node_modules/@babel/core/node_modules/@babel/traverse
+node_modules/@babel/helper-define-polyfill-provider/node_modules/@babel/traverse
+node_modules/@babel/helper-hoist-variables/node_modules/@babel/traverse
+node_modules/@babel/helper-module-transforms/node_modules/@babel/traverse
+node_modules/@babel/helper-replace-supers/node_modules/@babel/traverse
+node_modules/@babel/helper-wrap-function/node_modules/@babel/traverse
+node_modules/@babel/helpers/node_modules/@babel/traverse
+node_modules/@babel/traverse
+
+@octokit/plugin-paginate-rest  <=9.2.1
+Severity: moderate
+@octokit/plugin-paginate-rest has a Regular Expression in iterator Leads to ReDoS Vulnerability Due to Catastrophic Backtracking - https://github.com/advisories/GHSA-h5c3-5r3r-rr8q
+fix available via `npm audit fix --force`
+Will install lerna@9.0.7, which is a breaking change
+node_modules/@octokit/plugin-paginate-rest
+  @octokit/rest  16.39.0 - 20.0.1
+  Depends on vulnerable versions of @octokit/core
+  Depends on vulnerable versions of @octokit/plugin-paginate-rest
+  node_modules/@octokit/rest
+    @lerna/github-client  *
+    Depends on vulnerable versions of @octokit/rest
+    Depends on vulnerable versions of git-url-parse
+    node_modules/@lerna/github-client
+      @lerna/version  <=6.4.1
+      Depends on vulnerable versions of @lerna/github-client
+      Depends on vulnerable versions of @lerna/prompt
+      Depends on vulnerable versions of @lerna/run-lifecycle
+      node_modules/@lerna/version
+        @lerna/publish  <=3.0.0-rc.0 || 3.0.5 - 6.4.2-beta.0
+        Depends on vulnerable versions of @lerna/npm-dist-tag
+        Depends on vulnerable versions of @lerna/npm-publish
+        Depends on vulnerable versions of @lerna/otplease
+        Depends on vulnerable versions of @lerna/pack-directory
+        Depends on vulnerable versions of @lerna/prompt
+        Depends on vulnerable versions of @lerna/run-lifecycle
+        Depends on vulnerable versions of @lerna/version
+        Depends on vulnerable versions of libnpmaccess
+        Depends on vulnerable versions of npm-registry-fetch
+        Depends on vulnerable versions of pacote
+        node_modules/@lerna/publish
+          lerna  3.2.0 - 8.2.4
+          Depends on vulnerable versions of @lerna/add
+          Depends on vulnerable versions of @lerna/bootstrap
+          Depends on vulnerable versions of @lerna/clean
+          Depends on vulnerable versions of @lerna/create
+          Depends on vulnerable versions of @lerna/import
+          Depends on vulnerable versions of @lerna/publish
+          Depends on vulnerable versions of @lerna/version
+          node_modules/lerna
+
+@octokit/request  <=8.4.0
+Severity: moderate
+Depends on vulnerable versions of @octokit/request-error
+@octokit/request has a Regular Expression in fetchWrapper that Leads to ReDoS Vulnerability Due to Catastrophic Backtracking - https://github.com/advisories/GHSA-rmvr-2pp2-xj38
+fix available via `npm audit fix --force`
+Will install lerna@9.0.7, which is a breaking change
+node_modules/@octokit/request
+  @octokit/core  <=5.0.0-beta.5
+  Depends on vulnerable versions of @octokit/graphql
+  Depends on vulnerable versions of @octokit/request
+  Depends on vulnerable versions of @octokit/request-error
+  node_modules/@octokit/core
+  @octokit/graphql  <=2.1.3 || 3.0.0 - 6.0.1
+  Depends on vulnerable versions of @octokit/request
+  node_modules/@octokit/graphql
+
+@octokit/request-error  <=5.1.0
+Severity: moderate
+@octokit/request-error has a Regular Expression in index that Leads to ReDoS Vulnerability Due to Catastrophic Backtracking - https://github.com/advisories/GHSA-xx4v-prfh-6cgc
+fix available via `npm audit fix --force`
+Will install lerna@9.0.7, which is a breaking change
+node_modules/@octokit/request-error
+
+@tootallnate/once  <3.0.1
+@tootallnate/once vulnerable to Incorrect Control Flow Scoping - https://github.com/advisories/GHSA-vpq2-c234-7xj6
+fix available via `npm audit fix --force`
+Will install lerna@9.0.7, which is a breaking change
+node_modules/@tootallnate/once
+  http-proxy-agent  4.0.1 - 5.0.0
+  Depends on vulnerable versions of @tootallnate/once
+  node_modules/http-proxy-agent
+    make-fetch-happen  7.1.1 - 14.0.0
+    Depends on vulnerable versions of cacache
+    Depends on vulnerable versions of http-proxy-agent
+    node_modules/make-fetch-happen
+      npm-registry-fetch  7.0.0 - 18.0.0
+      Depends on vulnerable versions of make-fetch-happen
+      node_modules/npm-registry-fetch
+        @lerna/npm-dist-tag  >=3.14.0
+        Depends on vulnerable versions of @lerna/otplease
+        Depends on vulnerable versions of npm-registry-fetch
+        node_modules/@lerna/npm-dist-tag
+        libnpmaccess  4.0.0 - 8.0.6
+        Depends on vulnerable versions of npm-registry-fetch
+        node_modules/libnpmaccess
+        libnpmpublish  3.0.0 - 9.0.9
+        Depends on vulnerable versions of npm-registry-fetch
+        node_modules/libnpmpublish
+          @lerna/npm-publish  >=3.11.0
+          Depends on vulnerable versions of @lerna/otplease
+          Depends on vulnerable versions of @lerna/run-lifecycle
+          Depends on vulnerable versions of libnpmpublish
+          node_modules/@lerna/npm-publish
+        pacote  5.0.0 - 19.0.1 || 20.0.0 || 21.0.0
+        Depends on vulnerable versions of @npmcli/run-script
+        Depends on vulnerable versions of cacache
+        Depends on vulnerable versions of npm-registry-fetch
+        Depends on vulnerable versions of tar
+        node_modules/pacote
+          @lerna/add  3.1.1 - 3.5.0 || 3.11.0 - 6.4.2-beta.0
+          Depends on vulnerable versions of @lerna/bootstrap
+          Depends on vulnerable versions of pacote
+          node_modules/@lerna/add
+          @lerna/create  3.11.0 - 3.14.2 || 4.0.0 - 8.2.4
+          Depends on vulnerable versions of pacote
+          node_modules/@lerna/create
+
+ajv  <=6.12.6 || 7.0.0-alpha.0 - 8.17.1
+Severity: moderate
+Prototype Pollution in Ajv - https://github.com/advisories/GHSA-v88g-cgmw-v5xw
+ajv has ReDoS when using `$data` option - https://github.com/advisories/GHSA-2g4f-4pwh-qvx6
+ajv has ReDoS when using `$data` option - https://github.com/advisories/GHSA-2g4f-4pwh-qvx6
+fix available via `npm audit fix`
+node_modules/@eslint/eslintrc/node_modules/ajv
+node_modules/ajv
+node_modules/babel-loader/node_modules/ajv
+node_modules/schema-utils/node_modules/ajv
+node_modules/stylelint/node_modules/ajv
+node_modules/table/node_modules/ajv
+
+ansi-regex  3.0.0 || 4.0.0 - 4.1.0 || 5.0.0
+Severity: high
+Inefficient Regular Expression Complexity in chalk/ansi-regex - https://github.com/advisories/GHSA-93q8-gq69-wqmw
+Inefficient Regular Expression Complexity in chalk/ansi-regex - https://github.com/advisories/GHSA-93q8-gq69-wqmw
+Inefficient Regular Expression Complexity in chalk/ansi-regex - https://github.com/advisories/GHSA-93q8-gq69-wqmw
+fix available via `npm audit fix`
+node_modules/@jest/core/node_modules/ansi-regex
+node_modules/@lerna/cli/node_modules/ansi-regex
+node_modules/ansi-align/node_modules/ansi-regex
+node_modules/boxen/node_modules/ansi-regex
+node_modules/cli-table3/node_modules/ansi-regex
+node_modules/cli-truncate/node_modules/ansi-regex
+node_modules/cliui/node_modules/ansi-regex
+node_modules/eslint/node_modules/ansi-regex
+node_modules/inquirer/node_modules/ansi-regex
+node_modules/jest-extended/node_modules/ansi-regex
+node_modules/jest-extended/node_modules/jest-matcher-utils/node_modules/ansi-regex
+node_modules/listr2/node_modules/ansi-regex
+node_modules/localtunnel/node_modules/ansi-regex
+node_modules/log-update/node_modules/ansi-regex
+node_modules/pretty-format/node_modules/ansi-regex
+node_modules/string-length/node_modules/ansi-regex
+node_modules/stylelint/node_modules/ansi-regex
+node_modules/table/node_modules/ansi-regex
+node_modules/widest-line/node_modules/ansi-regex
+node_modules/yargs/node_modules/ansi-regex
+
+axios  <=0.30.3
+Severity: high
+Axios Cross-Site Request Forgery Vulnerability - https://github.com/advisories/GHSA-wf5p-g6vw-rhxx
+axios Inefficient Regular Expression Complexity vulnerability - https://github.com/advisories/GHSA-cph5-m8f7-6c5x
+axios Requests Vulnerable To Possible SSRF and Credential Leakage via Absolute URL - https://github.com/advisories/GHSA-jr5f-v2jv-69x6
+Axios is Vulnerable to Denial of Service via __proto__ Key in mergeConfig - https://github.com/advisories/GHSA-43fc-jf86-j433
+Axios has a NO_PROXY Hostname Normalization Bypass that Leads to SSRF - https://github.com/advisories/GHSA-3p68-rc4w-qgx5
+Axios has Unrestricted Cloud Metadata Exfiltration via Header Injection Chain - https://github.com/advisories/GHSA-fvcv-3m26-pcqx
+fix available via `npm audit fix`
+node_modules/axios
+  localtunnel  1.9.0 - 2.0.1
+  Depends on vulnerable versions of axios
+  node_modules/localtunnel
+
+brace-expansion  <=1.1.12
+Severity: moderate
+brace-expansion Regular Expression Denial of Service vulnerability - https://github.com/advisories/GHSA-v6h2-p8h4-qcjw
+brace-expansion: Zero-step sequence causes process hang and memory exhaustion - https://github.com/advisories/GHSA-f886-m6hf-6m8v
+fix available via `npm audit fix`
+node_modules/brace-expansion
+
+braces  <3.0.3
+Severity: high
+Uncontrolled resource consumption in braces - https://github.com/advisories/GHSA-grv7-fg5c-xmjg
+fix available via `npm audit fix --force`
+Will install liftoff@5.0.1, which is a breaking change
+node_modules/braces
+node_modules/micromatch/node_modules/braces
+  micromatch  <=4.0.7
+  Depends on vulnerable versions of braces
+  node_modules/@jest/core/node_modules/micromatch
+  node_modules/@jest/transform/node_modules/micromatch
+  node_modules/browser-sync/node_modules/micromatch
+  node_modules/fast-glob/node_modules/micromatch
+  node_modules/jest-config/node_modules/micromatch
+  node_modules/jest-haste-map/node_modules/micromatch
+  node_modules/jest-message-util/node_modules/micromatch
+  node_modules/jest-util/node_modules/micromatch
+  node_modules/lint-staged/node_modules/micromatch
+  node_modules/micromatch
+  node_modules/stylelint/node_modules/micromatch
+    anymatch  1.2.0 - 2.0.0
+    Depends on vulnerable versions of micromatch
+    node_modules/sane/node_modules/anymatch
+      sane  1.5.0 - 4.1.0
+      Depends on vulnerable versions of anymatch
+      Depends on vulnerable versions of micromatch
+      node_modules/sane
+        jest-haste-map  24.0.0-alpha.0 - 26.6.2
+        Depends on vulnerable versions of sane
+        node_modules/jest-haste-map
+          @jest/core  <=26.6.3
+          Depends on vulnerable versions of @jest/reporters
+          Depends on vulnerable versions of @jest/transform
+          Depends on vulnerable versions of jest-config
+          Depends on vulnerable versions of jest-haste-map
+          Depends on vulnerable versions of jest-resolve-dependencies
+          Depends on vulnerable versions of jest-runner
+          Depends on vulnerable versions of jest-runtime
+          Depends on vulnerable versions of jest-snapshot
+          node_modules/@jest/core
+            jest  24.2.0-alpha.0 - 26.6.3
+            Depends on vulnerable versions of @jest/core
+            Depends on vulnerable versions of jest-cli
+            node_modules/jest
+            jest-cli  24.2.0-alpha.0 - 26.6.3
+            Depends on vulnerable versions of @jest/core
+            Depends on vulnerable versions of jest-config
+            node_modules/jest/node_modules/jest-cli
+          @jest/reporters  <=26.6.2
+          Depends on vulnerable versions of @jest/transform
+          Depends on vulnerable versions of jest-haste-map
+          node_modules/@jest/reporters
+          @jest/test-sequencer  <=26.6.3
+          Depends on vulnerable versions of jest-haste-map
+          Depends on vulnerable versions of jest-runner
+          Depends on vulnerable versions of jest-runtime
+          node_modules/@jest/test-sequencer
+            jest-config  24.2.0-alpha.0 - 26.6.3
+            Depends on vulnerable versions of @jest/test-sequencer
+            Depends on vulnerable versions of babel-jest
+            Depends on vulnerable versions of jest-jasmine2
+            node_modules/jest-config
+              jest-runner  24.0.0-alpha.0 - 26.6.3
+              Depends on vulnerable versions of jest-config
+              Depends on vulnerable versions of jest-haste-map
+              Depends on vulnerable versions of jest-runtime
+              node_modules/jest-runner
+              jest-runtime  24.0.0-alpha.0 - 26.6.3
+              Depends on vulnerable versions of @jest/transform
+              Depends on vulnerable versions of jest-config
+              Depends on vulnerable versions of jest-haste-map
+              Depends on vulnerable versions of jest-snapshot
+              node_modules/jest-runtime
+                jest-jasmine2  24.2.0-alpha.0 - 26.6.3
+                Depends on vulnerable versions of jest-runtime
+                Depends on vulnerable versions of jest-snapshot
+                node_modules/jest-jasmine2
+          @jest/transform  <=26.6.2
+          Depends on vulnerable versions of jest-haste-map
+          node_modules/@jest/transform
+            babel-jest  24.2.0-alpha.0 - 26.6.3
+            Depends on vulnerable versions of @jest/transform
+            node_modules/babel-jest
+          jest-snapshot  24.2.0-alpha.0 - 24.5.0 || 26.1.0 - 26.6.2
+          Depends on vulnerable versions of jest-haste-map
+          node_modules/jest-snapshot
+            jest-resolve-dependencies  26.1.0 - 26.6.3
+            Depends on vulnerable versions of jest-snapshot
+            node_modules/jest-resolve-dependencies
+    findup-sync  0.4.0 - 3.0.0
+    Depends on vulnerable versions of micromatch
+    node_modules/findup-sync
+      liftoff  2.2.3 - 3.1.0
+      Depends on vulnerable versions of findup-sync
+      node_modules/liftoff
+    jest-message-util  18.5.0-alpha.7da3df39 - 24.9.0
+    Depends on vulnerable versions of micromatch
+    node_modules/jest-extended/node_modules/jest-message-util
+      expect  21.0.0-beta.1 - 24.9.0 || 30.0.0-alpha.1 - 30.0.0-beta.2
+      Depends on vulnerable versions of jest-message-util
+      node_modules/jest-extended/node_modules/expect
+        jest-extended  0.1.0 - 0.11.5
+        Depends on vulnerable versions of expect
+        node_modules/jest-extended
+
+cookie  <0.7.0
+cookie accepts cookie name, path, and domain with out of bounds characters - https://github.com/advisories/GHSA-pxg6-pf52-xh8x
+fix available via `npm audit fix`
+node_modules/cookie
+  engine.io  <=6.6.1
+  Depends on vulnerable versions of cookie
+  Depends on vulnerable versions of debug
+  Depends on vulnerable versions of ws
+  node_modules/engine.io
+    socket.io  <=3.0.4
+    Depends on vulnerable versions of debug
+    Depends on vulnerable versions of engine.io
+    Depends on vulnerable versions of socket.io-client
+    node_modules/socket.io
+      browser-sync  <=3.0.2
+      Depends on vulnerable versions of eazy-logger
+      Depends on vulnerable versions of qs
+      Depends on vulnerable versions of send
+      Depends on vulnerable versions of serve-static
+      Depends on vulnerable versions of socket.io
+      node_modules/browser-sync
+
+cross-spawn  <6.0.6 || >=7.0.0 <7.0.5
+Severity: high
+Regular Expression Denial of Service (ReDoS) in cross-spawn - https://github.com/advisories/GHSA-3xgq-45jj-v275
+Regular Expression Denial of Service (ReDoS) in cross-spawn - https://github.com/advisories/GHSA-3xgq-45jj-v275
+fix available via `npm audit fix`
+node_modules/cross-spawn
+node_modules/execa/node_modules/cross-spawn
+node_modules/jest-changed-files/node_modules/cross-spawn
+node_modules/sane/node_modules/cross-spawn
+
+debug  4.0.0 - 4.3.0
+Regular Expression Denial of Service in debug - https://github.com/advisories/GHSA-gxpj-cx7g-858c
+fix available via `npm audit fix`
+node_modules/@babel/traverse/node_modules/debug
+node_modules/engine.io/node_modules/debug
+node_modules/istanbul-lib-source-maps/node_modules/debug
+node_modules/socket.io/node_modules/debug
+  socket.io-parser  <=3.3.4 || 3.4.0 - 4.0.2
+  Depends on vulnerable versions of debug
+  node_modules/socket.io-parser
+  node_modules/socket.io/node_modules/socket.io-parser
+
+decode-uri-component  <0.2.1
+Severity: high
+decode-uri-component vulnerable to Denial of Service (DoS) - https://github.com/advisories/GHSA-w573-4hg7-7wgq
+fix available via `npm audit fix`
+node_modules/decode-uri-component
+
+eazy-logger  <=4.0.1
+Severity: high
+eazy-logger prototype pollution - https://github.com/advisories/GHSA-r7jx-5m6m-cpg9
+fix available via `npm audit fix`
+node_modules/eazy-logger
+
+
+flatted  <=3.4.1
+Severity: high
+flatted vulnerable to unbounded recursion DoS in parse() revive phase - https://github.com/advisories/GHSA-25h7-pfq9-p65f
+Prototype Pollution via parse() in NodeJS flatted - https://github.com/advisories/GHSA-rf6f-7fwh-wjgh
+fix available via `npm audit fix`
+node_modules/flatted
+
+follow-redirects  <=1.15.11
+Severity: moderate
+Exposure of Sensitive Information to an Unauthorized Actor in follow-redirects - https://github.com/advisories/GHSA-pw2r-vq6v-hr8c
+follow-redirects' Proxy-Authorization header kept across hosts - https://github.com/advisories/GHSA-cxjh-pqwp-8mfp
+Follow Redirects improperly handles URLs in the url.parse() function - https://github.com/advisories/GHSA-jchw-25xp-jwwc
+follow-redirects leaks Custom Authentication Headers to Cross-Domain Redirect Targets - https://github.com/advisories/GHSA-r4q5-vmmm-2653
+fix available via `npm audit fix`
+node_modules/follow-redirects
+
+form-data  <2.5.4
+Severity: critical
+form-data uses unsafe random function in form-data for choosing boundary - https://github.com/advisories/GHSA-fjxv-7rqg-78g4
+fix available via `npm audit fix --force`
+Will install lerna@9.0.7, which is a breaking change
+node_modules/form-data
+  request  *
+  Depends on vulnerable versions of form-data
+  Depends on vulnerable versions of tough-cookie
+  node_modules/request
+    jsdom  0.1.20 || 0.2.0 - 16.5.3
+    Depends on vulnerable versions of request
+    Depends on vulnerable versions of request-promise-native
+    Depends on vulnerable versions of tough-cookie
+    node_modules/jsdom
+    node-gyp  <=10.3.1
+    Depends on vulnerable versions of request
+    Depends on vulnerable versions of tar
+    node_modules/@npmcli/run-script/node_modules/node-gyp
+    node_modules/node-gyp
+      @npmcli/run-script  1.1.1 - 9.0.1
+      Depends on vulnerable versions of node-gyp
+      node_modules/@npmcli/run-script
+      npm-lifecycle  >=2.0.0
+      Depends on vulnerable versions of node-gyp
+      node_modules/npm-lifecycle
+        @lerna/run-lifecycle  <=3.4.1 || 3.11.0 - 4.0.0
+        Depends on vulnerable versions of npm-lifecycle
+        node_modules/@lerna/run-lifecycle
+          @lerna/bootstrap  3.11.0 - 4.0.0 || 5.5.3 || 6.3.1-beta.0 - 6.3.1-beta.4
+          Depends on vulnerable versions of @lerna/run-lifecycle
+          node_modules/@lerna/bootstrap
+          @lerna/pack-directory  *
+          Depends on vulnerable versions of @lerna/get-packed
+          Depends on vulnerable versions of @lerna/run-lifecycle
+          Depends on vulnerable versions of tar
+          node_modules/@lerna/pack-directory
+    request-promise-core  *
+    Depends on vulnerable versions of request
+    node_modules/request-promise-core
+      request-promise-native  >=1.0.0
+      Depends on vulnerable versions of request
+      Depends on vulnerable versions of request-promise-core
+      Depends on vulnerable versions of tough-cookie
+      node_modules/request-promise-native
+
+got  <11.8.5
+Severity: moderate
+Got allows a redirect to a UNIX socket - https://github.com/advisories/GHSA-pfrx-2q88-qq97
+fix available via `npm audit fix --force`
+Will install update-notifier@7.3.1, which is a breaking change
+node_modules/got
+  package-json  <=6.5.0
+  Depends on vulnerable versions of got
+  node_modules/package-json
+    latest-version  0.2.0 - 5.1.0
+    Depends on vulnerable versions of package-json
+    node_modules/latest-version
+      update-notifier  0.2.0 - 5.1.0
+      Depends on vulnerable versions of latest-version
+      node_modules/update-notifier
+
+http-cache-semantics  <4.1.1
+Severity: high
+http-cache-semantics vulnerable to Regular Expression Denial of Service - https://github.com/advisories/GHSA-rc47-6667-2j5j
+fix available via `npm audit fix`
+node_modules/cacheable-request/node_modules/http-cache-semantics
+node_modules/http-cache-semantics
+
+immutable  <3.8.3
+Severity: high
+Immutable is vulnerable to Prototype Pollution - https://github.com/advisories/GHSA-wf6x-7x77-mvgw
+fix available via `npm audit fix`
+node_modules/immutable
+
+ip  *
+Severity: high
+ip SSRF improper categorization in isPublic - https://github.com/advisories/GHSA-2p57-rm9w-gvfp
+NPM IP package incorrectly identifies some private IP addresses as public - https://github.com/advisories/GHSA-78xj-cgh5-2h22
+fix available via `npm audit fix`
+node_modules/ip
+  socks  1.0.0 - 2.7.1
+  Depends on vulnerable versions of ip
+  node_modules/socks
+
+js-yaml  <3.14.2 || >=4.0.0 <4.1.1
+Severity: moderate
+js-yaml has prototype pollution in merge (<<) - https://github.com/advisories/GHSA-mh29-5h37-fv8m
+js-yaml has prototype pollution in merge (<<) - https://github.com/advisories/GHSA-mh29-5h37-fv8m
+fix available via `npm audit fix`
+node_modules/@eslint/eslintrc/node_modules/js-yaml
+node_modules/@istanbuljs/load-nyc-config/node_modules/js-yaml
+node_modules/eslint/node_modules/js-yaml
+node_modules/gray-matter/node_modules/js-yaml
+node_modules/js-yaml
+
+json-schema  <0.4.0
+Severity: critical
+json-schema is vulnerable to Prototype Pollution - https://github.com/advisories/GHSA-896r-f27r-55mw
+fix available via `npm audit fix`
+node_modules/json-schema
+  jsprim  0.3.0 - 1.4.1 || 2.0.0 - 2.0.1
+  Depends on vulnerable versions of json-schema
+  node_modules/jsprim
+
+json5  <1.0.2 || >=2.0.0 <2.2.2
+Severity: high
+Prototype Pollution in JSON5 via Parse Method - https://github.com/advisories/GHSA-9c47-m6qq-7p4h
+Prototype Pollution in JSON5 via Parse Method - https://github.com/advisories/GHSA-9c47-m6qq-7p4h
+fix available via `npm audit fix`
+node_modules/babel-loader/node_modules/json5
+node_modules/json5
+node_modules/tsconfig-paths/node_modules/json5
+
+kind-of  6.0.0 - 6.0.2
+Severity: high
+Validation Bypass in kind-of - https://github.com/advisories/GHSA-6c8f-qphg-qjgp
+fix available via `npm audit fix`
+node_modules/base/node_modules/kind-of
+node_modules/snapdragon-node/node_modules/kind-of
+
+loader-utils  <=1.4.1 || 2.0.0 - 2.0.3
+Severity: critical
+Prototype pollution in webpack loader-utils - https://github.com/advisories/GHSA-76p3-8jx3-jpfq
+Prototype pollution in webpack loader-utils - https://github.com/advisories/GHSA-76p3-8jx3-jpfq
+loader-utils is vulnerable to Regular Expression Denial of Service (ReDoS) via url variable - https://github.com/advisories/GHSA-3rfm-jhwj-7488
+loader-utils is vulnerable to Regular Expression Denial of Service (ReDoS) via url variable - https://github.com/advisories/GHSA-3rfm-jhwj-7488
+loader-utils is vulnerable to Regular Expression Denial of Service (ReDoS) - https://github.com/advisories/GHSA-hhq3-ff78-jv3g
+loader-utils is vulnerable to Regular Expression Denial of Service (ReDoS) - https://github.com/advisories/GHSA-hhq3-ff78-jv3g
+fix available via `npm audit fix`
+node_modules/babel-loader/node_modules/loader-utils
+node_modules/loader-utils
+
+locutus  <=3.0.24
+Severity: critical
+locutus is vulnerable to Prototype Pollution - https://github.com/advisories/GHSA-rxrv-835q-v5mh
+locutus call_user_func_array vulnerable to Remote Code Execution (RCE) due to Code Injection - https://github.com/advisories/GHSA-fp25-p6mj-qqg6
+Locutus vulnerable to RCE via unsanitized input in create_function() - https://github.com/advisories/GHSA-vh9h-29pq-r5m8
+Locutus has Prototype Pollution via __proto__ Key Injection in unserialize() - https://github.com/advisories/GHSA-4mph-v827-f877
+fix available via `npm audit fix`
+node_modules/locutus
+
+lodash  <=4.17.23
+Severity: critical
+Prototype Pollution in lodash - https://github.com/advisories/GHSA-fvqr-27wr-82fm
+Command Injection in lodash - https://github.com/advisories/GHSA-35jh-r3h4-6jhm
+Prototype Pollution in lodash - https://github.com/advisories/GHSA-4xc9-xhrj-v574
+Prototype Pollution in lodash - https://github.com/advisories/GHSA-jf85-cpcp-j695
+Prototype Pollution in lodash - https://github.com/advisories/GHSA-p6mc-m468-83gw
+Lodash has Prototype Pollution Vulnerability in `_.unset` and `_.omit` functions - https://github.com/advisories/GHSA-xxjr-mmjv-4gpg
+lodash vulnerable to Code Injection via `_.template` imports key names - https://github.com/advisories/GHSA-r5fr-rjxr-66jc
+lodash vulnerable to Prototype Pollution via array path bypass in `_.unset` and `_.omit` - https://github.com/advisories/GHSA-f23m-r3pf-42rh
+fix available via `npm audit fix --force`
+Will install inquirer@13.4.2, which is a breaking change
+node_modules/lodash
+node_modules/vorpal/node_modules/inquirer/node_modules/lodash
+  inquirer  <=0.11.4 || 3.0.0 - 8.2.6 || 9.0.0 - 9.3.7
+  Depends on vulnerable versions of external-editor
+  Depends on vulnerable versions of lodash
+  node_modules/inquirer
+  node_modules/vorpal/node_modules/inquirer
+    @lerna/prompt  <=5.1.8
+    Depends on vulnerable versions of inquirer
+    node_modules/@lerna/prompt
+      @lerna/clean  <=5.1.8 || 5.5.3
+      Depends on vulnerable versions of @lerna/prompt
+      node_modules/@lerna/clean
+      @lerna/import  <=5.1.8 || 5.5.3
+      Depends on vulnerable versions of @lerna/prompt
+      node_modules/@lerna/import
+      @lerna/otplease  <=5.1.8
+      Depends on vulnerable versions of @lerna/prompt
+      node_modules/@lerna/otplease
+    vorpal  *
+    Depends on vulnerable versions of inquirer
+    node_modules/vorpal
+
+lodash.template  <=4.5.0
+Severity: high
+Command Injection in lodash - https://github.com/advisories/GHSA-35jh-r3h4-6jhm
+lodash vulnerable to Code Injection via `_.template` imports key names - https://github.com/advisories/GHSA-r5fr-rjxr-66jc
+fix available via `npm audit fix`
+node_modules/lodash.template
+
+
+minimatch  <=3.1.3
+Severity: high
+minimatch ReDoS vulnerability - https://github.com/advisories/GHSA-f8q6-p94x-37v3
+minimatch has a ReDoS via repeated wildcards with non-matching literal in pattern - https://github.com/advisories/GHSA-3ppc-4f35-3m26
+minimatch has ReDoS: matchOne() combinatorial backtracking via multiple non-adjacent GLOBSTAR segments - https://github.com/advisories/GHSA-7r86-cg39-jmmj
+minimatch ReDoS: nested *() extglobs generate catastrophically backtracking regular expressions - https://github.com/advisories/GHSA-23c5-xmqv-rm74
+fix available via `npm audit fix --force`
+Will install twig@3.0.0, which is a breaking change
+node_modules/minimatch
+  twig  0.4.0 - 1.17.1
+  Depends on vulnerable versions of minimatch
+  node_modules/twig
+
+nanoid  <=3.3.7
+Severity: moderate
+Predictable results in nanoid generation when given non-integer values - https://github.com/advisories/GHSA-mwcw-c2x4-8c55
+Exposure of Sensitive Information to an Unauthorized Actor in nanoid - https://github.com/advisories/GHSA-qrpm-p2h7-hrv2
+fix available via `npm audit fix`
+node_modules/postcss/node_modules/nanoid
+
+normalize-url  4.3.0 - 4.5.0
+Severity: high
+ReDoS in normalize-url - https://github.com/advisories/GHSA-px4h-xg32-q955
+fix available via `npm audit fix`
+node_modules/cacheable-request/node_modules/normalize-url
+
+nunjucks  <3.2.4
+Severity: moderate
+Nunjucks autoescape bypass leads to cross site scripting - https://github.com/advisories/GHSA-x77j-w7wf-fjmw
+fix available via `npm audit fix`
+node_modules/nunjucks
+
+parse-path  <5.0.0
+Severity: high
+Authorization Bypass in parse-path - https://github.com/advisories/GHSA-3j8f-xvm3-ffx4
+fix available via `npm audit fix --force`
+Will install lerna@9.0.7, which is a breaking change
+node_modules/parse-path
+  parse-url  <=8.0.0
+  Depends on vulnerable versions of parse-path
+  node_modules/parse-url
+    git-up  <=6.0.0
+    Depends on vulnerable versions of parse-url
+    node_modules/git-up
+      git-url-parse  4.0.0 - 12.0.0
+      Depends on vulnerable versions of git-up
+      node_modules/git-url-parse
+
+
+parseuri  <2.0.0
+Severity: moderate
+parse-uri Regular expression Denial of Service (ReDoS) - https://github.com/advisories/GHSA-6fx8-h7jm-663j
+fix available via `npm audit fix`
+node_modules/parseuri
+  engine.io-client  0.7.0 || 0.7.8 - 0.7.9 || 1.0.2 - 6.1.1
+  Depends on vulnerable versions of parseuri
+  Depends on vulnerable versions of ws
+  Depends on vulnerable versions of xmlhttprequest-ssl
+  node_modules/engine.io-client
+  socket.io-client  1.0.0-pre - 4.4.1
+  Depends on vulnerable versions of engine.io-client
+  Depends on vulnerable versions of parseuri
+  node_modules/socket.io-client
+    browser-sync-ui  1.0.1 - 2.27.7
+    Depends on vulnerable versions of socket.io-client
+    node_modules/browser-sync-ui
+
+path-to-regexp  4.0.0 - 6.2.2
+Severity: high
+path-to-regexp outputs backtracking regular expressions - https://github.com/advisories/GHSA-9wv6-86v2-598j
+fix available via `npm audit fix`
+node_modules/path-to-regexp
+
+picomatch  <=2.3.1
+Severity: high
+Picomatch: Method Injection in POSIX Character Classes causes incorrect Glob Matching - https://github.com/advisories/GHSA-3v7f-55p6-f55p
+Picomatch has a ReDoS vulnerability via extglob quantifiers - https://github.com/advisories/GHSA-c2c7-rcm5-vvqj
+fix available via `npm audit fix`
+node_modules/fast-glob/node_modules/picomatch
+node_modules/picomatch
+node_modules/readdirp/node_modules/picomatch
+node_modules/stylelint/node_modules/picomatch
+
+postcss  <=8.4.30
+Severity: moderate
+Regular Expression Denial of Service in postcss - https://github.com/advisories/GHSA-hwj9-h5mp-3pm3
+Regular Expression Denial of Service in postcss - https://github.com/advisories/GHSA-566m-qj78-rww5
+PostCSS line return parsing error - https://github.com/advisories/GHSA-7fh5-64p2-3v2j
+fix available via `npm audit fix --force`
+Will install resolve-url-loader@5.0.0, which is a breaking change
+node_modules/postcss
+node_modules/postcss-less/node_modules/postcss
+node_modules/postcss-safe-parser/node_modules/postcss
+node_modules/postcss-sass/node_modules/postcss
+node_modules/postcss-scss/node_modules/postcss
+node_modules/resolve-url-loader/node_modules/postcss
+node_modules/stylelint/node_modules/postcss
+node_modules/sugarss/node_modules/postcss
+  autoprefixer  1.0.20131222 - 9.8.8
+  Depends on vulnerable versions of postcss
+  node_modules/stylelint/node_modules/autoprefixer
+    stylelint  0.1.0 - 13.13.1
+    Depends on vulnerable versions of autoprefixer
+    Depends on vulnerable versions of postcss
+    Depends on vulnerable versions of postcss-less
+    Depends on vulnerable versions of postcss-safe-parser
+    Depends on vulnerable versions of postcss-sass
+    Depends on vulnerable versions of postcss-scss
+    Depends on vulnerable versions of sugarss
+    node_modules/stylelint
+      stylelint-config-recommended  <=2.2.0 || 4.0.0 - 5.0.0
+      Depends on vulnerable versions of stylelint
+      node_modules/stylelint-config-recommended
+        stylelint-config-standard  4.0.1 - 18.3.0 || 21.0.0 - 22.0.0
+        Depends on vulnerable versions of stylelint
+        Depends on vulnerable versions of stylelint-config-recommended
+        node_modules/stylelint-config-standard
+      stylelint-scss  0.0.0-alpha.1 || 1.0.0 - 3.21.0
+      Depends on vulnerable versions of stylelint
+      node_modules/stylelint-scss
+  postcss-less  <=3.1.4
+  Depends on vulnerable versions of postcss
+  node_modules/postcss-less
+  postcss-safe-parser  <=4.0.2
+  Depends on vulnerable versions of postcss
+  node_modules/postcss-safe-parser
+  postcss-sass  <=0.4.4
+  Depends on vulnerable versions of postcss
+  node_modules/postcss-sass
+  postcss-scss  <=2.1.1
+  Depends on vulnerable versions of postcss
+  node_modules/postcss-scss
+  resolve-url-loader  0.0.1-experiment-postcss || 3.0.0-alpha.1 - 4.0.0
+  Depends on vulnerable versions of postcss
+  node_modules/resolve-url-loader
+  sugarss  <=2.0.0
+  Depends on vulnerable versions of postcss
+  node_modules/sugarss
+
+qs  <=6.14.1
+Severity: high
+qs vulnerable to Prototype Pollution - https://github.com/advisories/GHSA-hrpp-h998-j3pp
+qs vulnerable to Prototype Pollution - https://github.com/advisories/GHSA-hrpp-h998-j3pp
+qs vulnerable to Prototype Pollution - https://github.com/advisories/GHSA-hrpp-h998-j3pp
+qs's arrayLimit bypass in comma parsing allows denial of service - https://github.com/advisories/GHSA-w7fw-mjwx-w883
+qs's arrayLimit bypass in its bracket notation allows DoS via memory exhaustion - https://github.com/advisories/GHSA-6rw7-vpxm-498p
+fix available via `npm audit fix`
+node_modules/parse-path/node_modules/qs
+node_modules/qs
+node_modules/request/node_modules/qs
+
+
+semver  2.0.0-alpha - 5.7.1 || 6.0.0 - 6.3.0 || 7.0.0 - 7.5.1
+Severity: high
+semver vulnerable to Regular Expression Denial of Service - https://github.com/advisories/GHSA-c2qf-rxjj-qqgw
+semver vulnerable to Regular Expression Denial of Service - https://github.com/advisories/GHSA-c2qf-rxjj-qqgw
+semver vulnerable to Regular Expression Denial of Service - https://github.com/advisories/GHSA-c2qf-rxjj-qqgw
+fix available via `npm audit fix`
+node_modules/@babel/core/node_modules/semver
+node_modules/@babel/helper-compilation-targets/node_modules/semver
+node_modules/@babel/helper-define-polyfill-provider/node_modules/semver
+node_modules/@babel/preset-env/node_modules/semver
+node_modules/@jest/reporters/node_modules/semver
+node_modules/babel-loader/node_modules/semver
+node_modules/babel-plugin-polyfill-corejs2/node_modules/semver
+node_modules/configstore/node_modules/semver
+node_modules/conventional-changelog-writer/node_modules/semver
+node_modules/core-js-compat/node_modules/semver
+node_modules/editorconfig/node_modules/semver
+node_modules/find-cache-dir/node_modules/semver
+node_modules/git-semver-tags/node_modules/semver
+node_modules/istanbul-lib-instrument/node_modules/semver
+node_modules/istanbul-lib-report/node_modules/semver
+node_modules/jest-snapshot/node_modules/semver
+node_modules/make-dir/node_modules/semver
+node_modules/meow/node_modules/read-pkg/node_modules/semver
+node_modules/node-gyp/node_modules/semver
+node_modules/node-notifier/node_modules/semver
+node_modules/normalize-package-data/node_modules/semver
+node_modules/package-json/node_modules/semver
+node_modules/sane/node_modules/cross-spawn/node_modules/semver
+node_modules/semver
+node_modules/semver-diff/node_modules/semver
+node_modules/stylelint/node_modules/read-pkg/node_modules/semver
+node_modules/temp-write/node_modules/semver
+node_modules/write-json-file/node_modules/semver
+  core-js-compat  3.6.0 - 3.25.0
+  Depends on vulnerable versions of semver
+  node_modules/core-js-compat
+
+send  <0.19.0
+send vulnerable to template injection that can lead to XSS - https://github.com/advisories/GHSA-m6fv-jmcg-4jfg
+fix available via `npm audit fix`
+node_modules/send
+  serve-static  <=1.16.0
+  Depends on vulnerable versions of send
+  node_modules/serve-static
+
+serialize-javascript  <=7.0.4
+Severity: high
+Serialize JavaScript is Vulnerable to RCE via RegExp.flags and Date.prototype.toISOString() - https://github.com/advisories/GHSA-5c6j-r48x-rmvq
+Serialize JavaScript has CPU Exhaustion Denial of Service via crafted array-like objects - https://github.com/advisories/GHSA-qj8w-gfj5-8c6v
+fix available via `npm audit fix --force`
+Will install copy-webpack-plugin@14.0.0, which is a breaking change
+node_modules/serialize-javascript
+  copy-webpack-plugin  4.3.0 - 13.0.1
+  Depends on vulnerable versions of serialize-javascript
+  node_modules/copy-webpack-plugin
+  terser-webpack-plugin  <=5.3.16
+  Depends on vulnerable versions of serialize-javascript
+  node_modules/terser-webpack-plugin
+
+
+
+
+tar  <=7.5.10
+Severity: high
+Denial of service while parsing a tar file due to lack of folders count validation - https://github.com/advisories/GHSA-f5x3-32g6-xq36
+node-tar Vulnerable to Arbitrary File Creation/Overwrite via Hardlink Path Traversal - https://github.com/advisories/GHSA-34x7-hfp2-rc4v
+node-tar is Vulnerable to Arbitrary File Overwrite and Symlink Poisoning via Insufficient Path Sanitization - https://github.com/advisories/GHSA-8qq5-rm4j-mr97
+Arbitrary File Read/Write via Hardlink Target Escape Through Symlink Chain in node-tar Extraction - https://github.com/advisories/GHSA-83g3-92jg-28cx
+tar has Hardlink Path Traversal via Drive-Relative Linkpath - https://github.com/advisories/GHSA-qffp-2rhf-9h96
+node-tar Symlink Path Traversal via Drive-Relative Linkpath - https://github.com/advisories/GHSA-9ppj-qmqm-q256
+Race Condition in node-tar Path Reservations via Unicode Ligature Collisions on macOS APFS - https://github.com/advisories/GHSA-r6q2-hw4h-h46w
+fix available via `npm audit fix --force`
+Will install lerna@9.0.7, which is a breaking change
+node_modules/@lerna/get-packed/node_modules/tar
+node_modules/@lerna/pack-directory/node_modules/tar
+node_modules/@npmcli/run-script/node_modules/tar
+node_modules/cacache/node_modules/tar
+node_modules/pacote/node_modules/tar
+node_modules/tar
+  @lerna/get-packed  *
+  Depends on vulnerable versions of tar
+  node_modules/@lerna/get-packed
+  cacache  14.0.0 - 18.0.4
+  Depends on vulnerable versions of tar
+  node_modules/cacache
+
+terser  5.0.0 - 5.14.1
+Severity: high
+Terser insecure use of regular expressions leads to ReDoS - https://github.com/advisories/GHSA-4wf5-vphf-c2xc
+fix available via `npm audit fix`
+node_modules/terser
+
+tmp  <=0.2.3
+tmp allows arbitrary temporary file / directory write via symbolic link `dir` parameter - https://github.com/advisories/GHSA-52f5-9888-hmc6
+fix available via `npm audit fix --force`
+Will install inquirer@13.4.2, which is a breaking change
+node_modules/tmp
+  external-editor  >=1.1.1
+  Depends on vulnerable versions of tmp
+  node_modules/external-editor
+
+tough-cookie  <4.1.3
+Severity: moderate
+tough-cookie Prototype Pollution vulnerability - https://github.com/advisories/GHSA-72xf-g2v4-qvf3
+fix available via `npm audit fix --force`
+Will install lerna@9.0.7, which is a breaking change
+node_modules/jsdom/node_modules/tough-cookie
+node_modules/tough-cookie
+
+trim-newlines  <3.0.1
+Severity: high
+Uncontrolled Resource Consumption in trim-newlines - https://github.com/advisories/GHSA-7p7h-4mm5-852v
+fix available via `npm audit fix`
+node_modules/get-pkg-repo/node_modules/trim-newlines
+node_modules/trim-newlines
+  meow  3.4.0 - 5.0.0
+  Depends on vulnerable versions of trim-newlines
+  node_modules/get-pkg-repo/node_modules/meow
+
+trim-off-newlines  <1.0.3
+Severity: moderate
+Uncontrolled Resource Consumption in trim-off-newlines - https://github.com/advisories/GHSA-38fc-wpqx-33j7
+fix available via `npm audit fix`
+node_modules/trim-off-newlines
+
+webpack  5.0.0-alpha.0 - 5.93.0
+Severity: critical
+Cross-realm object access in Webpack 5 - https://github.com/advisories/GHSA-hc6q-2mpp-qw7j
+Webpack's AutoPublicPathRuntimeModule has a DOM Clobbering Gadget that leads to XSS - https://github.com/advisories/GHSA-4vvj-4cpr-p986
+fix available via `npm audit fix`
+node_modules/webpack
+
+word-wrap  <1.2.4
+Severity: moderate
+word-wrap vulnerable to Regular Expression Denial of Service - https://github.com/advisories/GHSA-j8xg-fqg3-53r7
+fix available via `npm audit fix`
+node_modules/word-wrap
+
+ws  7.0.0 - 7.5.9
+Severity: high
+ws affected by a DoS when handling a request with many HTTP headers - https://github.com/advisories/GHSA-3h5v-q93c-6h6q
+fix available via `npm audit fix`
+node_modules/ws
+
+xmlhttprequest-ssl  <=1.6.1
+Severity: critical
+xmlhttprequest and xmlhttprequest-ssl vulnerable to Arbitrary Code Injection - https://github.com/advisories/GHSA-h4j5-c7cj-74xg
+Improper Certificate Validation in xmlhttprequest-ssl - https://github.com/advisories/GHSA-72mh-269x-7mh5
+fix available via `npm audit fix`
+node_modules/xmlhttprequest-ssl
+
+yaml  1.0.0 - 1.10.2
+Severity: moderate
+yaml is vulnerable to Stack Overflow via deeply nested YAML collections - https://github.com/advisories/GHSA-48c2-rrv3-qjmp
+fix available via `npm audit fix`
+node_modules/yaml
+
+147 vulnerabilities (12 low, 63 moderate, 56 high, 16 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues possible (including breaking changes), run:
+  npm audit fix --force
+
+Some issues need review, and may require choosing
+a different dependency.

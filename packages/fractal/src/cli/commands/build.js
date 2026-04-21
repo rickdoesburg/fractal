@@ -9,7 +9,7 @@ module.exports = {
     },
 
     action(args) {
-        const builder = this.fractal.web.builder(args.options);
+        const builder = this.fractal.web.builder(args);
 
         builder.on('start', () => {
             this.console.success('Build started...');

@@ -1,9 +1,8 @@
 'use strict';
 
 const _ = require('lodash');
-const chalk = require('chalk');
-const chokidar = require('chokidar');
-const Vorpal = require('vorpal');
+const yargs = require('yargs/yargs');
+const { hideBin } = require('yargs/helpers');
 const Console = require('./console');
 const Notifier = require('./notifier');
 const requireAll = require('require-all');
@@ -11,7 +10,6 @@ const Log = require('@frctl/core').Log;
 const mix = require('@frctl/core').mixins.mix;
 const Configurable = require('@frctl/core').mixins.configurable;
 const Emitter = require('@frctl/core').mixins.emitter;
-const utils = require('@frctl/core').utils;
 
 class Cli extends mix(Configurable, Emitter) {
     constructor(app) {
@@ -19,20 +17,18 @@ class Cli extends mix(Configurable, Emitter) {
         this.config(app.get('cli'));
 
         this._app = app;
-        this._commands = new Set();
-        this._vorpal = new Vorpal();
-        this._defaultsLoaded = false;
-        this._interactive = false;
+        this._commands = new Map();
         this._configPath = null;
         this._scope = 'project';
         this._cliPackage = {};
         this._env = {};
         this._commandsDir = `${__dirname}/commands`;
+        this._yargs = null;
 
-        this.console = new Console(this._vorpal);
+        this.console = new Console();
         this.console.debugMode(app.debug);
 
-        this.notify = new Notifier(this.console, this._interactive);
+        this.notify = new Notifier(this.console, false);
 
         for (const method of ['log', 'error', 'warn', 'debug', 'success']) {
             this[method] = function () {
@@ -43,22 +39,18 @@ class Cli extends mix(Configurable, Emitter) {
     }
 
     has(command) {
-        return !!this._vorpal.find(command);
+        return this._commands.has(command);
     }
 
     get(command) {
-        return this._vorpal.find(command);
+        return this._commands.get(command);
     }
 
     isInteractive() {
-        return this._interactive;
+        return false; // No longer interactive
     }
 
-    command(command, action, config) {
-        const console = this.console;
-        const vorpal = this._vorpal;
-        const app = this._app;
-
+    command(commandStr, action, config) {
         action = action || function () {};
         config = config || {};
         if (_.isString(config)) {
@@ -71,45 +63,97 @@ class Cli extends mix(Configurable, Emitter) {
 
         if (!_.includes(commandScope, this._scope)) {
             // command not available in this scope
-            const cmd = vorpal.command(command.replace(/</g, '[').replace(/>/g, ']'), config.description || ' ');
-            cmd
-                .action((args, done) => {
-                    console.error(
-                        'No Fractal CLI configuration file found. Are you running this from the root directory of your project?'
-                    );
-                    done();
-                })
-                .hidden().__scope = commandScope;
-            cmd.action = undefined; // prevent this from being overridden now it is bound
             return;
         }
 
-        const cmd = this._vorpal.command(command, config.description || ' ');
+        // Parse command name and args (e.g., "new <path>" -> "new" with positional "path")
+        const parts = commandStr.split(' ');
+        const commandName = parts[0];
+        const positionals = parts.slice(1);
 
-        cmd.action(function (args, done) {
-            this.console = console;
-            this.fractal = app;
-            return action.bind(this)(args, done);
+        this._commands.set(commandName, {
+            action,
+            config,
+            positionals,
         });
-        cmd.action = undefined; // prevent this from being overridden now it is bound
 
-        (config.options || []).forEach((opt) => {
-            opt = _.castArray(opt);
-            cmd.option.apply(cmd, opt);
-        });
-        if (config.hidden) {
-            cmd.hidden();
-        }
-        if (config.alias) {
-            cmd.alias(config.alias);
-        }
-        cmd.__scope = commandScope;
-        return cmd;
+        return this;
     }
 
     exec() {
+        // Load all commands
         _.forEach(requireAll(this._commandsDir), (c) => this.command(c.command, c.action, c.config || {}));
-        return arguments.length ? this._execFromString.apply(this, Array.from(arguments)) : this._execFromArgv();
+
+        // Build yargs configuration
+        this._yargs = yargs(hideBin(process.argv));
+
+        const console = this.console;
+        const app = this._app;
+
+        this._commands.forEach((cmd, name) => {
+            const { action, config, positionals } = cmd;
+
+            this._yargs.command(
+                name + (positionals.length ? ' ' + positionals.join(' ') : ''),
+                config.description || '',
+                (yargs) => {
+                    // Add options
+                    if (config.options) {
+                        config.options.forEach((opt) => {
+                            const [flags, description, def] = _.castArray(opt);
+                            const match = flags.match(/^(-[a-z]), --([a-z-]+)(?:\s+<(.+)>)?/i);
+                            if (match) {
+                                const [, short, long, arg] = match;
+                                yargs.option(long, {
+                                    alias: short.replace('-', ''),
+                                    describe: description,
+                                    type: arg ? 'string' : 'boolean',
+                                    default: def,
+                                });
+                            } else {
+                                const longMatch = flags.match(/^--([a-z-]+)(?:\s+<(.+)>)?/i);
+                                if (longMatch) {
+                                    const [, long, arg] = longMatch;
+                                    yargs.option(long, {
+                                        describe: description,
+                                        type: arg ? 'string' : 'boolean',
+                                        default: def,
+                                    });
+                                }
+                            }
+                        });
+                    }
+                    return yargs;
+                },
+                (argv) => {
+                    // Execute command
+                    const context = {
+                        console,
+                        fractal: app,
+                    };
+
+                    const promise = this._scope === 'global' || name === 'new' ? Promise.resolve() : app.load();
+
+                    promise
+                        .then(() => {
+                            return action.call(context, argv, () => {});
+                        })
+                        .catch((err) => {
+                            console.error(err.message, err);
+                            process.exit(1);
+                        });
+                }
+            );
+        });
+
+        this._yargs
+            .demandCommand(1, 'You must provide a command')
+            .help()
+            .alias('help', 'h')
+            .version(app.version)
+            .alias('version', 'v')
+            .strict()
+            .parse();
     }
 
     theme(theme) {
@@ -125,6 +169,7 @@ class Cli extends mix(Configurable, Emitter) {
         this._configPath = configPath;
         this._env = env;
         this._cliPackage = cliPackage;
+        this.exec();
         return this;
     }
 
@@ -142,120 +187,6 @@ class Cli extends mix(Configurable, Emitter) {
 
     get cliPackage() {
         return this._cliPackage;
-    }
-
-    /**
-     * Run a command specified by string
-     * @param  {String} command The command line string to process
-     * @param  {Function} onStdout Output handler
-     * @return {Promise}
-     */
-
-    _execFromString(command, onStdout) {
-        const vorpal = this._vorpal;
-        const app = this._app;
-
-        if (typeof onStdout === 'function') {
-            vorpal.pipe(function (output) {
-                if (output) {
-                    output = output[0];
-                    const ret = onStdout(output);
-                    if (ret) {
-                        return ret;
-                    }
-                    return '';
-                }
-            });
-        }
-
-        return app.load().then(function () {
-            return vorpal.execSync(command);
-        });
-    }
-
-    /**
-     * Run a command by parsing argv
-     * @return {Promise}
-     */
-
-    _execFromArgv() {
-        const input = utils.parseArgv();
-        const console = this.console;
-        const vorpal = this._vorpal;
-        const app = this._app;
-
-        if (input.command) {
-            // non-interactive mode
-
-            vorpal.ui.attach = () => {}; // fix for vorpal bug in 1.11.4
-
-            if (this._scope === 'global') {
-                vorpal.parse(process.argv);
-                return;
-            }
-
-            return app.load().then(() => {
-                vorpal.parse(process.argv);
-            });
-        } else {
-            // interactive mode
-
-            if (input.command && !vorpal.find(input.command)) {
-                console.error(`The ${input.command} command is not recognised.`);
-                return;
-            }
-
-            if (this._scope == 'project') {
-                this._interactive = true;
-
-                console.slog().log('Initialising Fractal....');
-
-                return app.load().then(() => {
-                    app.watch();
-                    this._watchConfigFile();
-
-                    vorpal.delimiter(console.theme.delimiter());
-                    vorpal.history('fractal');
-
-                    console
-                        .box(
-                            'Fractal interactive CLI',
-                            `- Use the ${chalk.magenta(
-                                'help'
-                            )} command to see all available commands.\n- Use the ${chalk.magenta(
-                                'exit'
-                            )} command to exit the app.`,
-                            `Powered by Fractal v${app.version}`
-                        )
-                        .unslog()
-                        .br();
-
-                    return vorpal.show();
-                });
-            } else {
-                console
-                    .box(
-                        'Fractal CLI',
-                        `No local Fractal configuration found.
-You can use the ${chalk.magenta('fractal new')} command to create a new project.`,
-                        `Powered by Fractal v${app.version}`
-                    )
-                    .unslog();
-
-                return;
-            }
-        }
-    }
-
-    _watchConfigFile() {
-        if (this._scope === 'project' && this._configPath) {
-            const monitor = chokidar.watch(this._configPath);
-            monitor.on('change', () => {
-                this.warn('Your configuration file has changed.');
-                this.warn('Exit & restart the current process to see your changes take effect.');
-                monitor.close();
-            });
-        }
     }
 }
 

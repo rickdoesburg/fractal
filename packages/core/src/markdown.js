@@ -1,19 +1,25 @@
 'use strict';
 
-const marked = require('marked');
+const { marked } = require('marked');
 const _ = require('lodash');
 const highlighter = require('./highlighter');
 const renderer = new marked.Renderer();
 
-renderer.code = function (code, lang) {
+renderer.code = function (token) {
+    // In marked v15, renderer receives a token object instead of separate parameters
+    const code = token.text || token;
+    const lang = token.lang || null;
+
     const output = highlighter(code, lang);
-    if (output != null) {
-        code = output;
-    }
+    const finalCode = output != null ? output : code;
+
     if (!lang) {
-        return `<pre><code class="hljs">${code}</code></pre>`;
+        return `<pre><code class="hljs">${finalCode}</code></pre>`;
     }
-    return `<pre><code class="hljs ${this.options.langPrefix}${escape(lang, true)}">${code}</code></pre>`;
+    return `<pre><code class="hljs ${this.options.langPrefix || 'language-'}${escape(
+        lang,
+        true
+    )}">${finalCode}</code></pre>`;
 };
 
 /*
@@ -24,7 +30,7 @@ module.exports = function markdown(content, mdConfig) {
     mdConfig = _.cloneDeep(mdConfig && _.isObject(mdConfig) ? mdConfig : {});
     mdConfig.renderer = renderer;
 
-    return marked(_.toString(content), mdConfig);
+    return marked.parse(_.toString(content), mdConfig);
 };
 
 // TODO: remove if noone understands what this is for
