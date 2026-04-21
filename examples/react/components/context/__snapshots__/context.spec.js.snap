@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`tree asynchronously loads context 1`] = `
-Object {
+{
   "foo": "bar",
-  "xkcd": Object {
+  "xkcd": {
     "alt": "Proper User Policy apparently means Simon Says.",
     "day": "28",
     "img": "https://imgs.xkcd.com/comics/sandwich.png",

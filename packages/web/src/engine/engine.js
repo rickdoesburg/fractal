@@ -56,7 +56,7 @@ module.exports = class Engine {
         this._engine = Promise.promisifyAll(
             new nunjucks.Environment(loader, {
                 autoescape: false,
-            })
+            }),
         );
 
         _.forEach(extensions, (factory) => {

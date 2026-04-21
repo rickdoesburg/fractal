@@ -1,3 +1,5 @@
 'use strict';
 
-export default global.jQuery({});
+import $ from 'jquery';
+
+export default $({});

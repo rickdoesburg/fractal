@@ -60,13 +60,13 @@ module.exports = function (fractal, config) {
                 }
 
                 let innerContext = _.cloneDeep(
-                    entity.isComponent ? entity.variants().default().getContext() : entity.getContext()
+                    entity.isComponent ? entity.variants().default().getContext() : entity.getContext(),
                 );
 
                 if (token.contextStack !== undefined) {
                     innerContext = utils.defaultsDeep(
                         Twig.expression.parse.apply(this, [token.contextStack, context]),
-                        innerContext
+                        innerContext,
                     );
                 }
 

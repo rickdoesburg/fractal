@@ -142,7 +142,7 @@ class Cli extends mix(Configurable, Emitter) {
                             console.error(err.message, err);
                             process.exit(1);
                         });
-                }
+                },
             );
         });
 

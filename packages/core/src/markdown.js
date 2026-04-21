@@ -18,7 +18,7 @@ renderer.code = function (token) {
     }
     return `<pre><code class="hljs ${this.options.langPrefix || 'language-'}${escape(
         lang,
-        true
+        true,
     )}">${finalCode}</code></pre>`;
 };
 

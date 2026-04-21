@@ -70,7 +70,7 @@ FractalCli.launch(config, function (env) {
         if (semver.lt(env.modulePackage.version, `1.0.0`)) {
             // Project is using a legacy version of Fractal, load it the old way...
             console.log(
-                `Fractal version mismatch! Global: ${cliPackage.version} / Local: ${env.modulePackage.version}`
+                `Fractal version mismatch! Global: ${cliPackage.version} / Local: ${env.modulePackage.version}`,
             );
             let frctl = require(env.modulePath);
             frctl.run();
@@ -81,8 +81,8 @@ FractalCli.launch(config, function (env) {
             // looks like the configuration file is not correctly module.export'ing a fractal instance
             console.log(
                 `${chalk.red(
-                    'Configuration error'
-                )}: The CLI configuration file is not exporting an instance of Fractal.`
+                    'Configuration error',
+                )}: The CLI configuration file is not exporting an instance of Fractal.`,
             );
             return;
         }

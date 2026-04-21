@@ -25,13 +25,13 @@ describe('Collection', () => {
         it('sets root property to what is provided via config', () => {
             const collection = new Collection();
             collection.initCollection({ root: true });
-            expect(collection.isRoot).toBeTrue();
+            expect(collection.isRoot).toBe(true);
         });
 
         it('sets root property to false by default', () => {
             const collection = new Collection();
             collection.initCollection({});
-            expect(collection.isRoot).toBeFalse();
+            expect(collection.isRoot).toBe(false);
         });
     });
 
@@ -51,7 +51,7 @@ describe('Collection', () => {
         it('returns an array', () => {
             const collection = new Collection();
             collection.setItems(items);
-            expect(collection.items()).toBeArray();
+            expect(collection.items()).toEqual(expect.any(Array));
         });
         it('...with the expected length', () => {
             const collection = new Collection();
@@ -121,18 +121,18 @@ describe('Collection', () => {
         it('returns a plain object', () => {
             const collection = new Collection();
             collection.setItems(items);
-            expect(collection.toJSON()).toBeObject();
+            expect(collection.toJSON()).toEqual(expect.any(Object));
             expect(collection.toJSON()).not.toBeInstanceOf(Collection);
         });
         it("...with a 'isCollection' property", () => {
             const collection = new Collection();
             collection.setItems(items);
-            expect(collection.toJSON().isCollection).toBeTrue();
+            expect(collection.toJSON().isCollection).toBe(true);
         });
         it('...with an items array', () => {
             const collection = new Collection();
             collection.setItems(items);
-            expect(collection.toJSON().items).toBeArray();
+            expect(collection.toJSON().items).toEqual(expect.any(Array));
         });
         it('calls toJSON() on items if they have a toJSON method', () => {
             const collection = new Collection();
@@ -278,7 +278,7 @@ describe('Collection', () => {
             ]);
             const newCollection = collection.collections();
             expect(newCollection.size).toEqual(1);
-            expect(newCollection.eq(0).isCollection).toBeTrue();
+            expect(newCollection.eq(0).isCollection).toBe(true);
         });
     });
 
@@ -298,8 +298,8 @@ describe('Collection', () => {
             const newCollection = collection.rootCollections();
             expect(newCollection).not.toBe(collection);
             expect(newCollection.size).toEqual(2);
-            expect(newCollection.eq(0).isRoot).toBeTrue();
-            expect(newCollection.eq(1).isRoot).toBeTrue();
+            expect(newCollection.eq(0).isRoot).toBe(true);
+            expect(newCollection.eq(1).isRoot).toBe(true);
         });
     });
 
@@ -554,7 +554,7 @@ describe('Collection', () => {
     it('is iterable', () => {
         const collection = new Collection();
         collection.setItems(items);
-        expect(collection[Symbol.iterator]).toBeFunction();
+        expect(collection[Symbol.iterator]).toEqual(expect.any(Function));
     });
 
     it('is mixed in', () => {

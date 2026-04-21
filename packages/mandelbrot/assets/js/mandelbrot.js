@@ -1,7 +1,10 @@
 'use strict';
 
-import 'jquery';
+import $ from 'jquery';
 import 'jquery-pjax';
+
+// Expose jQuery globally for browser-based plugins
+window.$ = window.jQuery = $;
 
 import events from './events';
 import utils from './utils';
@@ -28,7 +31,7 @@ if (frctl.env == 'server') {
         {
             fragment: '#pjax-container',
             timeout: 10000,
-        }
+        },
     )
         .on('pjax:start', function (e, xhr, options) {
             const handle = $(e.relatedTarget).data('handle');

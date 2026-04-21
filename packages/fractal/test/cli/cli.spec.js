@@ -40,7 +40,7 @@ describe('Cli', () => {
                 },
                 () => {
                     // do nothing
-                }
+                },
             );
             expect(cli.has('test-command')).toBe(true);
         });

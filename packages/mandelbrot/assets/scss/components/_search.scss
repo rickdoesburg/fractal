@@ -51,6 +51,6 @@
 
     // Hide native clear button in chromium/webkit browsers
     &::-webkit-search-cancel-button {
-        -webkit-appearance: none;
+        appearance: none;
     }
 }

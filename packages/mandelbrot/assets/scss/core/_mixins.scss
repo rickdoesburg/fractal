@@ -28,10 +28,7 @@
 }
 
 @mixin trbl($val) {
-    top: $val;
-    right: $val;
-    bottom: $val;
-    left: $val;
+    inset: $val $val $val $val;
 }
 
 @mixin dragHandle {

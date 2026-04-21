@@ -41,7 +41,7 @@ module.exports = function (theme, env, app) {
 
     env.engine.addFilter('resourceUrl', function (str) {
         return `/${app.web.get(
-            'assets.mount'
+            'assets.mount',
         )}/components/${Path.relative(Path.resolve(app.components.get('path')), Path.resolve(str))}`;
     });
 
@@ -50,8 +50,8 @@ module.exports = function (theme, env, app) {
             process.cwd(),
             Path.join(
                 app.components.get('path'),
-                Path.relative(Path.resolve(app.components.get('path')), Path.resolve(str))
-            )
+                Path.relative(Path.resolve(app.components.get('path')), Path.resolve(str)),
+            ),
         );
     });
 

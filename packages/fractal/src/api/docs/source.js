@@ -125,7 +125,7 @@ module.exports = class DocSource extends EntitySource {
                     isHidden: dir.isHidden,
                     order: dir.order,
                     dir: dir,
-                }
+                },
             );
 
             if (!parent) {
@@ -150,7 +150,7 @@ module.exports = class DocSource extends EntitySource {
                         file: item,
                     });
                     return Promise.join(config, contents, (config, contents) =>
-                        Doc.create(config, contents, collection)
+                        Doc.create(config, contents, collection),
                     );
                 } else if (item.isDirectory) {
                     return build(item, collection);

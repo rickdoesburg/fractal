@@ -79,7 +79,7 @@ class TwigAdapter extends Fractal.Adapter {
                     obj._keys = _.compact(
                         _.map(obj, (val, key) => {
                             return _.isString(key) && !key.startsWith('_') ? key : undefined;
-                        })
+                        }),
                     );
                     _.each(obj, (val, key) => {
                         if (_.isPlainObject(val) && _.isString(key) && !key.startsWith('_')) {

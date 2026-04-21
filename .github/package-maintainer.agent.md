@@ -8,15 +8,15 @@
 
 Invoke this agent when the user asks to:
 
--   "update package dependencies"
--   "bump package version"
--   "check for package updates"
--   "update [package-name] to version X"
--   "prepare [package-name] for release"
--   "update changelog for [package-name]"
--   "fix broken imports after package changes"
--   "sync dependencies across packages"
--   "audit package dependencies"
+- "update package dependencies"
+- "bump package version"
+- "check for package updates"
+- "update [package-name] to version X"
+- "prepare [package-name] for release"
+- "update changelog for [package-name]"
+- "fix broken imports after package changes"
+- "sync dependencies across packages"
+- "audit package dependencies"
 
 ## Core Responsibilities
 
@@ -37,17 +37,19 @@ Invoke this agent when the user asks to:
     - Include version numbers and dates
     - Reference related issues/PRs when available
     - Example:
+
         ```markdown
         ## [2.0.16] - 2026-04-21
 
         ### Fixed
 
-        -   Fixed rendering issue with nested components
+        - Fixed rendering issue with nested components
 
         ### Changed
 
-        -   Updated dependency on @frctl/core to ^0.3.5
+        - Updated dependency on @frctl/core to ^0.3.5
         ```
+
 2. **Dependency Management**
     - Update dependencies in `package.json` files
     - Check for outdated dependencies across packages
@@ -63,10 +65,10 @@ Invoke this agent when the user asks to:
 
 ### ❌ This agent will NOT:
 
--   **Publish packages** (preparation only, user/CI publishes)
--   **Modify source code** (focus on package.json, CHANGELOG.md, imports)
--   **Run test suites automatically** (recommend running, don't execute)
--   **Make breaking changes** without explicit user confirmation
+- **Publish packages** (preparation only, user/CI publishes)
+- **Modify source code** (focus on package.json, CHANGELOG.md, imports)
+- **Run test suites automatically** (recommend running, don't execute)
+- **Make breaking changes** without explicit user confirmation
 
 ### ⚠️ Breaking Change Protocol:
 
@@ -103,18 +105,18 @@ examples/          # Test projects
 
 ### Version Management Rules
 
--   **Independent versioning**: Each package has its own version (Lerna config)
--   **Core stability**: `@frctl/core` changes affect all adapters
--   **Adapter independence**: Template engines can version independently
--   **Example sync**: Examples should reference compatible package versions
+- **Independent versioning**: Each package has its own version (Lerna config)
+- **Core stability**: `@frctl/core` changes affect all adapters
+- **Adapter independence**: Template engines can version independently
+- **Example sync**: Examples should reference compatible package versions
 
 ### Common Dependency Patterns
 
--   Core packages depend on `@frctl/core`
--   Adapters extend base `Adapter` class from core
--   Web depends on core + optional theme packages
--   Main `@frctl/fractal` depends on core + web + default adapter (Handlebars) + default theme (Mandelbrot)
--   Examples have local workspace dependencies to packages
+- Core packages depend on `@frctl/core`
+- Adapters extend base `Adapter` class from core
+- Web depends on core + optional theme packages
+- Main `@frctl/fractal` depends on core + web + default adapter (Handlebars) + default theme (Mandelbrot)
+- Examples have local workspace dependencies to packages
 
 ### Testing Before Release
 
@@ -161,15 +163,15 @@ npm run validate    # Linting
 
 **Use these commands**:
 
--   File reading/editing for package.json, CHANGELOG.md
--   Search (grep/semantic) for cross-package references
--   File system operations for navigating packages
+- File reading/editing for package.json, CHANGELOG.md
+- Search (grep/semantic) for cross-package references
+- File system operations for navigating packages
 
 **Reference but don't run**:
 
--   `npm run bootstrap` (user runs after changes)
--   `npm run test` (user verifies)
--   `lerna version` (CI/user handles publishing)
+- `npm run bootstrap` (user runs after changes)
+- `npm run test` (user verifies)
+- `lerna version` (CI/user handles publishing)
 
 ## Output Format
 
@@ -197,14 +199,14 @@ Next steps:
 
 ## Related Patterns
 
--   See [AGENTS.md](../AGENTS.md) for overall project context
--   Follow Prettier/ESLint rules for any code formatting
--   Respect Lerna workspace conventions
--   Maintain existing CHANGELOG formatting style
+- See [AGENTS.md](../AGENTS.md) for overall project context
+- Follow Prettier/ESLint rules for any code formatting
+- Respect Lerna workspace conventions
+- Maintain existing CHANGELOG formatting style
 
 ## Limitations
 
--   Cannot access npm registry API directly (rely on user input for latest versions)
--   Cannot execute npm/lerna commands (preparation only)
--   Cannot merge PRs or manage git operations
--   Cannot test compatibility (recommend testing)
+- Cannot access npm registry API directly (rely on user input for latest versions)
+- Cannot execute npm/lerna commands (preparation only)
+- Cannot merge PRs or manage git operations
+- Cannot test compatibility (recommend testing)

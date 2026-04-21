@@ -148,7 +148,7 @@ describe('Utils', () => {
 
         it('Merges the contents of arrays', () => {
             expect(utils.mergeProp(['one', 'two'], ['one', 'three', 'four'])).toEqual(
-                expect.arrayContaining(['one', 'two', 'three', 'four'])
+                expect.arrayContaining(['one', 'two', 'three', 'four']),
             );
         });
 
@@ -161,8 +161,8 @@ describe('Utils', () => {
             expect(
                 utils.mergeProp(
                     { one: 'one', nested: { three: 'three' } },
-                    { two: 'zwei', nested: { three: 'drei', four: 'vier' } }
-                )
+                    { two: 'zwei', nested: { three: 'drei', four: 'vier' } },
+                ),
             ).toEqual({ one: 'one', two: 'zwei', nested: { three: 'three', four: 'vier' } });
         });
 

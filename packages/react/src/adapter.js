@@ -129,7 +129,7 @@ class ReactAdapter extends Adapter {
         return utils.relUrlPath(
             assetPath,
             _.get(root.env.request || root.request, 'path', '/'),
-            fractal.web.get('builder.urls')
+            fractal.web.get('builder.urls'),
         );
     }
 }

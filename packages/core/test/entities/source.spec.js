@@ -44,7 +44,7 @@ describe('EntitySource', () => {
                 () => ({
                     register: () => mockEngine,
                 }),
-                { virtual: true }
+                { virtual: true },
             );
             expect(source.engine('mock_engine_module')).toBe(mockEngine);
         });
@@ -134,7 +134,7 @@ describe('EntitySource', () => {
         it('returns a plain object', () => {
             source.setItems(items);
             const json = source.toJSON();
-            expect(json).toBeObject();
+            expect(json).toEqual(expect.any(Object));
             expect(json).not.toBeInstanceOf(Source);
             // full path differs in every environment, so better to exclude from snapshot
             json.fullPath = '';

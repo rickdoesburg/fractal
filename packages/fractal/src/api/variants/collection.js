@@ -27,7 +27,7 @@ module.exports = class VariantCollection extends EntityCollection {
                 return variant.getContent().then((content) => {
                     return `<!-- ${variant.label} -->\n${content.trim()}\n`;
                 });
-            })
+            }),
         ).then((contents) => contents.join('\n'));
     }
 
@@ -94,7 +94,7 @@ module.exports = class VariantCollection extends EntityCollection {
 
         function findReadme(name) {
             const readmeName = `${opts.viewName}${source.get('splitter')}${name}.${source.get(
-                'files.notes'
+                'files.notes',
             )}.md`.toLowerCase();
 
             return _.find(readmes, (f) => f.name.toLowerCase() === readmeName);
@@ -116,8 +116,8 @@ module.exports = class VariantCollection extends EntityCollection {
                     },
                     defaultView,
                     resources,
-                    component
-                )
+                    component,
+                ),
             );
         }
 
@@ -151,7 +151,7 @@ module.exports = class VariantCollection extends EntityCollection {
                 p.readme = findReadme(p.name);
 
                 return Variant.create(p, viewFile, resources.filter(isRelated(p.handle)), component);
-            })
+            }),
         );
 
         variants = variants.concat(configuredVars);
@@ -180,7 +180,7 @@ module.exports = class VariantCollection extends EntityCollection {
                 name: `${component.name}-variants`,
             },
             _.orderBy(yield variants, ['order', 'name']),
-            component
+            component,
         );
     }
 };

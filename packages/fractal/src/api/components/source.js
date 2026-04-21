@@ -372,7 +372,7 @@ module.exports = class ComponentSource extends EntitySource {
                 `!**/*.${this.get('files.config')}.${this.get('ext')}`,
                 `!**/${this.get('files.config')}.{js,json,yaml,yml}`,
             ],
-            this._getPath(file)
+            this._getPath(file),
         );
     }
 
@@ -387,7 +387,7 @@ module.exports = class ComponentSource extends EntitySource {
                 `**/*.${this.get('files.notes')}.md`,
                 `!**/*${this.get('splitter')}*.${this.get('files.notes')}.md`,
             ],
-            this._getPath(file)
+            this._getPath(file),
         );
     }
 
@@ -398,7 +398,7 @@ module.exports = class ComponentSource extends EntitySource {
     isPreview(file) {
         return anymatch(
             [`**/${this.get('files.preview')}${this.get('ext')}`, `**/_${this.get('files.preview')}${this.get('ext')}`],
-            this._getPath(file)
+            this._getPath(file),
         );
     }
 
@@ -408,7 +408,7 @@ module.exports = class ComponentSource extends EntitySource {
                 `**/${this.get('files.collator')}${this.get('ext')}`,
                 `**/_${this.get('files.collator')}${this.get('ext')}`,
             ],
-            this._getPath(file)
+            this._getPath(file),
         );
     }
 
@@ -423,7 +423,7 @@ module.exports = class ComponentSource extends EntitySource {
                 `!**/${this.get('files.notes')}.md`,
                 `!**/*.${this.get('files.notes')}.md`,
             ],
-            this._getPath(file)
+            this._getPath(file),
         );
     }
 
@@ -467,7 +467,7 @@ module.exports = class ComponentSource extends EntitySource {
             const configFile =
                 _.find(
                     matched.configs,
-                    (f) => f.base.startsWith(`${dir.name}.`) || f.base.startsWith(`_${dir.name}.`)
+                    (f) => f.base.startsWith(`${dir.name}.`) || f.base.startsWith(`_${dir.name}.`),
                 ) || _.find(matched.configs, (f) => /^_?config\./.test(f.base));
             const dirConfig = yield EntitySource.getConfig(configFile, dirDefaults);
 
@@ -492,7 +492,7 @@ module.exports = class ComponentSource extends EntitySource {
 
                 const resources = new FileCollection(
                     {},
-                    matched.resources.map((f) => new File(f, source.relPath))
+                    matched.resources.map((f) => new File(f, source.relPath)),
                 );
                 const files = {
                     view: view,
@@ -519,7 +519,7 @@ module.exports = class ComponentSource extends EntitySource {
                 // config files for 'simple' components must have the format component-name.config.ext
                 const configFile = _.find(
                     matched.configs,
-                    (f) => f.base.startsWith(`${nameMatch}.`) || f.base.startsWith(`_${nameMatch}.`)
+                    (f) => f.base.startsWith(`${nameMatch}.`) || f.base.startsWith(`_${nameMatch}.`),
                 );
                 const conf = EntitySource.getConfig(configFile, {
                     name: view.name,

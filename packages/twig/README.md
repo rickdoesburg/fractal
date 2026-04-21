@@ -24,12 +24,13 @@ fractal.components.set('ext', '.twig');
 ## Using Twig for docs
 
 To use Twig for docs, set the docs engine to `@frctl/twig`:
+
 ```js
 fractal.docs.engine(twigAdapter);
 ```
 
-
 ## Extending with a custom config
+
 ```js
 /*
  * Require the Twig adapter
@@ -64,7 +65,7 @@ const twigAdapter = require('@frctl/twig')({
     // define Twig namespaces, see https://github.com/twigjs/twig.js/wiki#namespaces
     // this may break some fractal functionality, like including components via their handles and the render tag
     namespaces: {
-        'Components': './components'
+        Components: './components',
     },
 
     // use twig.js default template loader
@@ -77,43 +78,43 @@ const twigAdapter = require('@frctl/twig')({
     // register custom filters
     filters: {
         // usage: {{ label|capitalize }}
-        capitalize: function(str) {
+        capitalize: function (str) {
             if (!str) return '';
 
             return str.charAt(0).toUpperCase() + str.slice(1);
-        }
+        },
     },
 
     // register custom functions
     functions: {
         // usage: {{ capitalize(label) }}
-        capitalize: function(str) {
+        capitalize: function (str) {
             if (!str) return '';
 
             return str.charAt(0).toUpperCase() + str.slice(1);
-        }
+        },
     },
 
     // register custom tests
     tests: {
         // usage: {% if label is equalToNull %}
-        equalToNull: function(param) {
+        equalToNull: function (param) {
             return param === null;
-        }
+        },
     },
 
     // register custom tags
     tags: {
-        flag: function(Twig) {
+        flag: function (Twig) {
             // usage: {% flag "ajax" %}
             // all credit to https://github.com/twigjs/twig.js/wiki/Extending-twig.js-With-Custom-Tags
             return {
                 // unique name for tag type
-                type: "flag",
+                type: 'flag',
                 // regex match for tag (flag white-space anything)
                 regex: /^flag\s+(.+)$/,
                 // this is a standalone tag and doesn't require a following tag
-                next: [ ],
+                next: [],
                 open: true,
 
                 // runs on matched tokens when the template is loaded. (once per template)
@@ -121,10 +122,12 @@ const twigAdapter = require('@frctl/twig')({
                     var expression = token.match[1];
 
                     // Compile the expression. (turns the string into tokens)
-                    token.stack = Twig.expression.compile.apply(this, [{
-                        type:  Twig.expression.type.expression,
-                        value: expression
-                    }]).stack;
+                    token.stack = Twig.expression.compile.apply(this, [
+                        {
+                            type: Twig.expression.type.expression,
+                            value: expression,
+                        },
+                    ]).stack;
 
                     delete token.match;
                     return token;
@@ -140,32 +143,31 @@ const twigAdapter = require('@frctl/twig')({
 
                     return {
                         chain: false,
-                        output: output
+                        output: output,
                     };
-                }
+                },
             };
-        }
-    }
+        },
+    },
 });
-
 ```
-
 
 ## Using external plugins
 
 An example to use [twig-js-markdown](https://github.com/ianbytchek/twig-js-markdown):
+
 ```js
 const twigMarkdown = require('twig-markdown');
 const instance = fractal.components.engine(twigAdapter);
 
 // instance.twig refers to the twig.js instance
 instance.twig.extend(twigMarkdown);
-
 ```
 
 ## Included filters
 
 ### path
+
 Takes a root-relative path and re-writes it if required to make it work in static HTML exports.
 
 It is strongly recommended to use this filter whenever you need to link to any static assets from your templates.
@@ -173,6 +175,7 @@ It is strongly recommended to use this filter whenever you need to link to any s
 The path argument should begin with a slash and be relative to the web root. During a static HTML export this path will then be re-written to be relative to the current page.
 
 Usage:
+
 ```twig
 {{ '/css/my-stylesheet.css'|path }}
 ```
@@ -180,9 +183,11 @@ Usage:
 ## Included tags
 
 ### render
+
 The render tag renders a component (referenced by its handle) using the context data provided to it. If no data is provided, it will use the context data defined within the component's configuration file, if it has one.
 
 Usage:
+
 ```twig
 {% render "@component" with {some: 'values'} %}
 ```

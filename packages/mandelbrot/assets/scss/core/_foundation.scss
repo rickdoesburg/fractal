@@ -101,14 +101,14 @@ a {
 code,
 pre {
     font-family: $font-family-monospace;
-    font-size: 0.875rem; //14px
+    font-size: 0.875rem; // 14px
     line-height: (24/14);
 }
 
 svg {
     display: inline-block;
     vertical-align: text-bottom;
-    fill: currentColor;
+    fill: currentcolor;
 }
 
 ::-webkit-scrollbar {

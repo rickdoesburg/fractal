@@ -14,7 +14,7 @@ class Notifier {
             .box(
                 null,
                 `Fractal update available! ${chalk.dim(details.current)} → ${chalk.green(details.latest)}
-Run ${chalk.cyan('npm i -g ' + details.name)} to update.`
+Run ${chalk.cyan('npm i -g ' + details.name)} to update.`,
             )
             .unslog();
         this._console.br();

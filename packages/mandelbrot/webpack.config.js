@@ -1,5 +1,6 @@
 const path = require('path');
 const glob = require('globby');
+const webpack = require('webpack');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
@@ -22,6 +23,9 @@ module.exports = {
     output: {
         filename: 'js/[name].js',
         path: path.resolve(__dirname, 'dist'),
+        library: {
+            type: 'window',
+        },
     },
     plugins: [
         new MiniCssExtractPlugin({
@@ -39,6 +43,11 @@ module.exports = {
                 },
             ],
         }),
+        // ProvidePlugin makes jQuery available globally (replaces expose-loader)
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+        }),
     ],
     module: {
         rules: [
@@ -53,22 +62,12 @@ module.exports = {
                 },
             },
             {
-                test: require.resolve('jquery'),
-                loader: 'expose-loader',
-                options: {
-                    exposes: ['$', 'jQuery'],
-                },
-            },
-            {
+                // Use asset modules instead of file-loader (Webpack 5 built-in)
                 test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: 'img/[name].[ext]',
-                        },
-                    },
-                ],
+                type: 'asset/resource',
+                generator: {
+                    filename: 'img/[name][ext]',
+                },
             },
             {
                 test: /\.scss$/,
