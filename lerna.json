@@ -5,6 +5,13 @@
       "message": "chore: publish"
     }
   },
-  "packages": ["packages/*", "examples/*"],
+  "packages": [
+    "packages/*",
+    "!packages/react",
+    "!packages/twig",
+    "examples/*",
+    "!examples/react",
+    "!examples/twig"
+  ],
   "version": "independent"
 }
