@@ -1,8 +1,6 @@
 module.exports = {
     extends: ['stylelint-config-standard-scss'],
-    plugins: ['stylelint-prettier'],
     rules: {
-        'prettier/prettier': true,
         'no-descending-specificity': null,
         'font-family-no-missing-generic-family-keyword': null,
         'property-no-deprecated': null, // Allow deprecated clip property for screen readers
