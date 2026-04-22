@@ -5,7 +5,7 @@
 }
 
 ::selection {
-    --background-color: rgba(var(--skin-links), 0.2);
+    --background-color: rgb(var(--skin-links), 0.2);
 
     background-color: rgba($color-link, 0.2);
     background-color: var(--background-color, rgba($color-link, 0.2));
@@ -75,7 +75,7 @@ ul {
 }
 
 a {
-    --color: rgba(var(--skin-links), 0.9);
+    --color: rgb(var(--skin-links), 0.9);
 
     color: rgba($color-link, 0.9);
     color: var(--color, rgba($color-link, 0.9));
@@ -184,7 +184,7 @@ h6 {
 }
 
 mark {
-    --background-color: rgba(var(--skin-links), 0.3);
+    --background-color: rgb(var(--skin-links), 0.3);
 
     background-color: rgba($color-link, 0.3);
     background-color: var(--background-color, rgba($color-link, 0.3));
