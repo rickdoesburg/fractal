@@ -1,6 +1,7 @@
 {
   "name": "fractal",
   "private": true,
+  "description": "Fork of Fractal design system tool. Note: liftoff@3.1.0 dependency causes util._extend deprecation warning (harmless). Fixing requires upgrading liftoff to v4+ which has breaking API changes.",
   "engines": {
     "node": ">= 18.0.0"
   },

@@ -17,6 +17,7 @@ module.exports = {
         const server = this.fractal.web.server(args);
 
         server.on('ready', () => {
+
             const header = 'Fractal web UI server is running!';
             const footer = this.fractal.cli.isInteractive()
                 ? "Use the 'stop' command to stop the server."

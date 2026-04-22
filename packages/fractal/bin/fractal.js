@@ -103,5 +103,4 @@ FractalCli.launch(config, function (env) {
      */
 
     app.cli.init(scope, configPath, env, cliPackage);
-    app.cli.exec();
 });
