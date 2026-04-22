@@ -6,6 +6,8 @@
   },
   "scripts": {
     "bootstrap": "npm install",
+    "start": "cd examples/nunjucks && ../../packages/fractal/bin/fractal.js start --sync",
+    "build": "cd examples/nunjucks && ../../packages/fractal/bin/fractal.js build",
     "test": "npm run validate && npm run test:unit && npx lerna run test",
     "test:unit": "jest",
     "validate": "npm run eslint && npm run stylelint",
